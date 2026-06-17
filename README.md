@@ -1,13 +1,24 @@
-# AtolOnlineNet
-
-[![CI](https://github.com/ai-iskuzhin/AtolOnlineNet/actions/workflows/ci.yml/badge.svg)](https://github.com/ai-iskuzhin/AtolOnlineNet/actions/workflows/ci.yml)
-[![NuGet](https://img.shields.io/nuget/v/AtolOnlineNet.svg)](https://www.nuget.org/packages/AtolOnlineNet)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Targets](https://img.shields.io/badge/targets-netstandard2.0%20%7C%20net8.0%20%7C%20net10.0-512BD4.svg)](#установка)
-
-.NET SDK для облачной фискализации **АТОЛ Онлайн**
-(сервис `possystem`, **версия v4 / ФФД 1.05**): авторизация, регистрация чеков прихода/расхода/возврата,
-чеков коррекции и получение результата фискализации.
+<table>
+  <tr>
+    <td width="170" align="center" valign="middle">
+      <img src="https://raw.githubusercontent.com/ai-iskuzhin/AtolOnlineNet/main/assets/icon.png" width="140" alt="AtolOnlineNet logo" />
+    </td>
+    <td valign="middle">
+      <h1>AtolOnlineNet</h1>
+      <p>.NET SDK для облачной фискализации <a href="https://online.atol.ru/">АТОЛ Онлайн</a> (сервис <code>possystem</code> v4, ФФД 1.05): авторизация, регистрация чеков прихода/расхода/возврата, чеков коррекции и получение результата фискализации.</p>
+      <p>
+        <a href="https://github.com/ai-iskuzhin/AtolOnlineNet/actions/workflows/ci.yml"><img src="https://github.com/ai-iskuzhin/AtolOnlineNet/actions/workflows/ci.yml/badge.svg?branch=main" alt="CI" /></a>
+        <a href="https://github.com/ai-iskuzhin/AtolOnlineNet/actions/workflows/release.yml"><img src="https://github.com/ai-iskuzhin/AtolOnlineNet/actions/workflows/release.yml/badge.svg" alt="Release" /></a>
+        <a href="https://github.com/ai-iskuzhin/AtolOnlineNet/blob/main/LICENSE"><img src="https://img.shields.io/github/license/ai-iskuzhin/AtolOnlineNet?style=flat-square" alt="License" /></a>
+        <a href="https://dotnet.microsoft.com/"><img src="https://img.shields.io/badge/targets-netstandard2.0%20%7C%20net8.0%20%7C%20net10.0-512BD4?logo=dotnet&amp;style=flat-square" alt="Targets" /></a>
+      </p>
+      <p>
+        <a href="https://www.nuget.org/packages/AtolOnlineNet"><img src="https://img.shields.io/nuget/v/AtolOnlineNet?logo=nuget&amp;style=flat-square" alt="NuGet version" /></a>
+        <a href="https://www.nuget.org/packages/AtolOnlineNet"><img src="https://img.shields.io/nuget/dt/AtolOnlineNet?style=flat-square" alt="NuGet downloads" /></a>
+      </p>
+    </td>
+  </tr>
+</table>
 
 > SDK работает с облачным API
 > регистрации чеков (`/possystem/v4/...`). Версия `v5` (ФФД 1.2) пока не реализована — см. [Roadmap](#roadmap).

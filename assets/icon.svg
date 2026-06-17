@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 240 240" role="img">
+  <title>AtolOnlineNet logo</title>
+  <desc>Full square Atol red tile with the two-stroke "A" mark and an official .NET purple badge.</desc>
+
+  <!-- Full-bleed Atol red background, no border whitespace -->
+  <rect x="0" y="0" width="240" height="240" fill="#E31E2D"/>
+  <!-- Subtle top sheen -->
+  <path d="M0 0 L240 0 L240 150 A240 240 0 0 0 0 0 Z" fill="#ffffff" opacity="0.06"/>
+
+  <!-- Atol mark: two parallel white slashes forming the "A" -->
+  <g fill="#ffffff">
+    <!-- large right stroke (mirrored) -->
+    <polygon points="140,188 170,188 132,48 102,48"/>
+    <!-- small lower-left stroke -->
+    <polygon points="56,188 84,188 106,118 78,118"/>
+  </g>
+
+  <!-- .NET badge, bottom-right corner -->
+  <g transform="translate(150 150)">
+    <circle cx="34" cy="34" r="40" fill="#E31E2D"/>
+    <circle cx="34" cy="34" r="36" fill="#5c2d91"/>
+    <g transform="translate(34 34) scale(1.05) translate(-32 -32)" fill="#ffffff">
+      <path d="M27.27,41H24.65L15.28,26.46a6.06,6.06,0,0,1-.58-1.14h-.08a18.71,18.71,0,0,1,.1,2.5V41H12.59V22.77h2.77l9.12,14.28q.57.89.74,1.22h.05a19.29,19.29,0,0,1-.13-2.68V22.77h2.13Z"/>
+      <path d="M41.69,41H32V22.77h9.24V24.7H34.18v6.06h6.58v1.92H34.18V39h7.52Z"/>
+      <path d="M56,24.7H50.7V41H48.57V24.7H43.33V22.77H56Z"/>
+      <circle cx="7.4" cy="39.85" r="1.45"/>
+    </g>
+  </g>
+</svg>
