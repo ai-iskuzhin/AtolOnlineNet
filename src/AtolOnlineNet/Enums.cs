@@ -287,8 +287,8 @@ public enum DocumentStatus
 [JsonConverter(typeof(EnumMemberJsonConverter<AtolErrorType>))]
 public enum AtolErrorType
 {
-    /// <summary>Неизвестное/нераспознанное значение.</summary>
-    Unknown = 0,
+    /// <summary>Неизвестная ошибка (<c>unknown</c>); также значение по умолчанию для незаданного поля.</summary>
+    [EnumMember(Value = "unknown")] Unknown = 0,
 
     /// <summary>Отсутствие ошибки (<c>none</c>).</summary>
     [EnumMember(Value = "none")] None,

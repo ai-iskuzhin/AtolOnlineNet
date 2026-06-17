@@ -6,7 +6,12 @@ The project uses Semantic Versioning. Versions below `1.0.0` are preview release
 
 ## Unreleased
 
-No changes yet.
+### Changed
+
+- Deserializing an enum value the SDK does not recognize now throws
+  `AtolOnlineUnknownEnumValueException` (with a link to open an issue) instead of silently mapping to
+  `Unknown`. An unmapped value almost always means ATOL added a code after this release — surfacing it
+  makes the gap actionable. The `error.type` value `unknown` remains a valid, mapped value.
 
 ## 0.1.0-preview.1
 

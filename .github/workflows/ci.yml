@@ -13,6 +13,10 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
+# Opt JS actions into Node 24 (Node 20 is deprecated on the runners).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 jobs:
   build:
     name: Build
@@ -32,8 +36,9 @@ jobs:
       - name: Build
         run: dotnet build AtolOnlineNet.slnx --configuration Release --no-restore
 
-      # Share the compiled output so test/pack don't rebuild. Jobs run on the
+      # Share the compiled output so test/pack skip recompilation. Jobs run on the
       # same runner image and checkout path, so --no-build resolves correctly.
+      # (NuGet packages are not shared, so downstream jobs still run a quick restore.)
       - name: Upload build output
         uses: actions/upload-artifact@v5
         with:
@@ -63,6 +68,9 @@ jobs:
           name: build-output
           path: .
 
+      - name: Restore
+        run: dotnet restore AtolOnlineNet.slnx
+
       - name: Test
         run: dotnet test AtolOnlineNet.slnx --configuration Release --no-build --verbosity normal
 
@@ -84,6 +92,9 @@ jobs:
         with:
           name: build-output
           path: .
+
+      - name: Restore
+        run: dotnet restore src/AtolOnlineNet/AtolOnlineNet.csproj
 
       - name: Pack
         run: dotnet pack src/AtolOnlineNet/AtolOnlineNet.csproj --configuration Release --no-build --output artifacts/packages

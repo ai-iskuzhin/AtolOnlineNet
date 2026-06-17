@@ -164,6 +164,7 @@ switch (report.Status)
 | `AtolOnlineApiException` | Ошибка авторизации (`getToken` вернул `error`). Содержит `Error` (код, текст, тип). |
 | `AtolOnlineTransportException` | Сетевая ошибка / таймаут — ответ не получен. |
 | `AtolOnlineProtocolException` | Получен непарсируемый ответ (не JSON, пустое тело). Содержит статус и превью тела. |
+| `AtolOnlineUnknownEnumValueException` | ATOL вернул значение enum, неизвестное этой версии SDK (как правило, добавленное уже после релиза пакета). Это пробел в SDK — сообщите о нём: <https://github.com/ai-iskuzhin/AtolOnlineNet/issues/new>. |
 
 Символьные имена кодов ошибок сервиса — в `AtolServiceErrorCodes` (например `ExpiredToken = 11`).
 Истёкший токен обрабатывается автоматически (повторная авторизация и один повтор запроса).

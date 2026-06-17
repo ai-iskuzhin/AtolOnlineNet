@@ -51,6 +51,36 @@ public sealed class AtolOnlineProtocolException : AtolOnlineException
 }
 
 /// <summary>
+/// Thrown when ATOL Online returns an enum value this SDK version does not recognize — almost always a
+/// value ATOL added after this package was published. Please report it (with the value below) so it can
+/// be added to the SDK.
+/// </summary>
+public sealed class AtolOnlineUnknownEnumValueException : AtolOnlineException
+{
+    /// <summary>URL for reporting the missing value.</summary>
+    public const string IssuesUrl = "https://github.com/ai-iskuzhin/AtolOnlineNet/issues/new";
+
+    /// <summary>Initializes a new instance of the <see cref="AtolOnlineUnknownEnumValueException"/> class.</summary>
+    public AtolOnlineUnknownEnumValueException(Type enumType, string? wireValue)
+        : base(BuildMessage(enumType, wireValue))
+    {
+        EnumType = enumType;
+        WireValue = wireValue;
+    }
+
+    /// <summary>The .NET enum type that failed to map.</summary>
+    public Type EnumType { get; }
+
+    /// <summary>The unrecognized wire value received from ATOL Online.</summary>
+    public string? WireValue { get; }
+
+    private static string BuildMessage(Type enumType, string? wireValue)
+        => $"ATOL Online returned value '{wireValue}', which is not a known '{enumType.Name}' in this version of AtolOnlineNet. "
+           + "This is most likely a value ATOL added after this package was released — it is an SDK gap, not a problem with your code. "
+           + $"Please open an issue so it can be added (include the value '{wireValue}'): {IssuesUrl}";
+}
+
+/// <summary>
 /// A business error reported by ATOL Online in the response <c>error</c> envelope (for example a failed
 /// authentication, an invalid token, or a validation error).
 /// </summary>

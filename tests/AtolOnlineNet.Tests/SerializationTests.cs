@@ -106,10 +106,23 @@ public class SerializationTests
     }
 
     [Fact]
-    public void UnknownEnumValue_DeserializesToUnknown()
+    public void UnknownEnumValue_ThrowsWithIssueLink()
     {
-        var result = JsonSerializer.Deserialize<Vat>("""{"type":"vat999"}""", AtolJson.Options);
-        Assert.Equal(VatType.Unknown, result!.Type);
+        var ex = Assert.Throws<AtolOnlineUnknownEnumValueException>(
+            () => JsonSerializer.Deserialize<Vat>("""{"type":"vat999"}""", AtolJson.Options));
+
+        Assert.Equal(typeof(VatType), ex.EnumType);
+        Assert.Equal("vat999", ex.WireValue);
+        Assert.Contains(AtolOnlineUnknownEnumValueException.IssuesUrl, ex.Message);
+    }
+
+    [Fact]
+    public void AtolErrorType_Unknown_IsAValidWireValueNotAnError()
+    {
+        // "unknown" is a documented error.type value and must map, not throw.
+        var error = JsonSerializer.Deserialize<AtolError>(
+            """{"error_id":"x","code":0,"text":"oops","type":"unknown"}""", AtolJson.Options)!;
+        Assert.Equal(AtolErrorType.Unknown, error.Type);
     }
 
     [Fact]
