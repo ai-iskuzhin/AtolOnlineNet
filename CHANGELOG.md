@@ -6,6 +6,10 @@ The project uses Semantic Versioning. Versions below `1.0.0` are preview release
 
 ## Unreleased
 
+No changes yet.
+
+## 0.1.0-preview.2
+
 ### Changed
 
 - Deserializing an enum value the SDK does not recognize now throws
