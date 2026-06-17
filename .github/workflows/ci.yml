@@ -8,11 +8,15 @@ on:
     tags:
       - 'v*'
 
-jobs:
-  build-test-pack:
-    name: Build, Test, Pack
-    runs-on: ubuntu-latest
+# Cancel superseded runs for the same ref (e.g. new pushes to a PR).
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -28,13 +32,63 @@ jobs:
       - name: Build
         run: dotnet build AtolOnlineNet.slnx --configuration Release --no-restore
 
+      # Share the compiled output so test/pack don't rebuild. Jobs run on the
+      # same runner image and checkout path, so --no-build resolves correctly.
+      - name: Upload build output
+        uses: actions/upload-artifact@v5
+        with:
+          name: build-output
+          path: |
+            **/bin
+            **/obj
+          include-hidden-files: true
+          retention-days: 1
+
+  test:
+    name: Test
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Download build output
+        uses: actions/download-artifact@v5
+        with:
+          name: build-output
+          path: .
+
       - name: Test
         run: dotnet test AtolOnlineNet.slnx --configuration Release --no-build --verbosity normal
 
-      - name: Pack Package
+  pack:
+    name: Pack
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+
+      - name: Download build output
+        uses: actions/download-artifact@v5
+        with:
+          name: build-output
+          path: .
+
+      - name: Pack
         run: dotnet pack src/AtolOnlineNet/AtolOnlineNet.csproj --configuration Release --no-build --output artifacts/packages
 
-      - name: Upload Packages
+      - name: Upload packages
         uses: actions/upload-artifact@v5
         with:
           name: packages
