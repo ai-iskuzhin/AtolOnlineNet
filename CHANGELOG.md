@@ -8,6 +8,16 @@ The project uses Semantic Versioning. Versions below `1.0.0` are preview release
 
 No changes yet.
 
+## 1.0.0
+
+First stable release. The public API is validated against the ATOL Online test environment and is now
+stable under Semantic Versioning. No API changes since `0.1.0-preview.2`.
+
+### Fixed
+
+- README header converted from an HTML table to Markdown so it renders correctly on NuGet.org
+  (NuGet strips raw HTML).
+
 ## 0.1.0-preview.2
 
 ### Changed
